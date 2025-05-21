@@ -21,8 +21,8 @@ class User(Document):
         disabled (Optional[str]): Indica se o usuário está desativado (pode representar um status ou flag).
     """
     user_id: UUID = Field(default_factory=uuid4)
-    username: Indexed(str, unique=True)
-    email: Indexed(EmailStr, unique=True)
+    username: str = Indexed(unique=True)
+    email:  EmailStr = Indexed(unique=True) 
     hash_password: str
     first_name: Optional[str] = None
     last_name: Optional[str] = None

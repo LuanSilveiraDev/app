@@ -1,6 +1,6 @@
 from fastapi import APIRouter
-from api.api_v1.handlers import user
-
+from api.api_v1.handlers import user, task
+from api.auth.jwt import auth_router
 
 # Cria uma instância do roteador principal da aplicação
 router = APIRouter()
@@ -12,3 +12,14 @@ router.include_router(
     tags=['users']  # Tag utilizada na documentação automática (Swagger) para agrupar rotas de usuário
 )
 
+router.include_router(
+    auth_router,
+    prefix='/auth',
+    tags=['auth']
+)
+
+router.include_router(
+    task.task_router,
+    prefix='/task',
+    tags=['task']
+)
